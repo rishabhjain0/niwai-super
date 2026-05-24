@@ -1,0 +1,31 @@
+name: Sync Products JSON
+
+on:
+  schedule:
+    - cron: "*/1 * * * *"
+
+  workflow_dispatch:
+
+jobs:
+  sync-products:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Fetch Products JSON
+        run: |
+          curl "https://script.google.com/macros/s/AKfycbwXAcBtxwCo0YwWc178uxJeTtOcZQ1KXMypMIbLkiek7TaqaID7_rek6f0W7DkJ6AAG/exec" \
+          -o products.json
+
+      - name: Commit & Push
+        run: |
+          git config user.name "github-actions"
+          git config user.email "actions@github.com"
+
+          git add products.json
+
+          git diff --cached --quiet || git commit -m "Update products"
+
+          git push
