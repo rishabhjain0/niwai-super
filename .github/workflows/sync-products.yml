@@ -16,7 +16,7 @@ jobs:
 
       - name: Fetch Products JSON
         run: |
-          curl "https://script.google.com/macros/s/AKfycbwXAcBtxwCo0YwWc178uxJeTtOcZQ1KXMypMIbLkiek7TaqaID7_rek6f0W7DkJ6AAG/exec" \
+          curl -L "https://script.google.com/macros/s/AKfycbwXAcBtxwCo0YwWc178uxJeTtOcZQ1KXMypMIbLkiek7TaqaID7_rek6f0W7DkJ6AAG/exec" \
           -o products.json
 
       - name: Commit & Push
